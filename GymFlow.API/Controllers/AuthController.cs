@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using GymFlow.API.Data;
 using GymFlow.API.Entities;
 using GymFlow.API.DTOs;
-using BCrypt.Net;
 
 namespace GymFlow.API.Controllers;
 
@@ -48,5 +47,14 @@ public class AuthController : ControllerBase
             return Unauthorized(new { message = "Невірний Email або пароль." });
 
         return Ok(new AuthResponseDto("jwt-token-sample-xyz", user.FullName, user.Role));
+    }
+
+    [HttpGet("profile/{userId}")]
+    public async Task<IActionResult> GetProfile(Guid userId)
+    {
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null) return NotFound(new { message = "Користувача не знайдено." });
+
+        return Ok(new { user.Id, user.FullName, user.Email, user.Role, user.CreatedAt });
     }
 }

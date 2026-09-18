@@ -27,6 +27,45 @@ public class BookingsController : ControllerBase
         return Ok(classes);
     }
 
+    [HttpPost("classes")]
+    public async Task<IActionResult> CreateClass([FromBody] GymClass gymClass)
+    {
+        _context.GymClasses.Add(gymClass);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(GetClasses), new { id = gymClass.Id }, gymClass);
+    }
+
+    [HttpDelete("classes/{id}")]
+    public async Task<IActionResult> DeleteClass(Guid id)
+    {
+        var gymClass = await _context.GymClasses.FindAsync(id);
+        if (gymClass == null) return NotFound(new { message = "Заняття не знайдено." });
+
+        _context.GymClasses.Remove(gymClass);
+        await _context.SaveChangesAsync();
+        return Ok(new { message = "Заняття успішно видалено." });
+    }
+
+    [HttpGet("my-bookings")]
+    public async Task<IActionResult> GetUserBookings([FromQuery] Guid userId)
+    {
+        var bookings = await _context.Bookings
+            .Include(b => b.GymClass)
+            .Where(b => b.UserId == userId)
+            .Select(b => new {
+                b.Id,
+                b.GymClassId,
+                ClassTitle = b.GymClass!.Title,
+                TrainerName = b.GymClass.TrainerName,
+                StartTime = b.GymClass.StartTime,
+                b.Status,
+                b.BookedAt
+            })
+            .ToListAsync();
+
+        return Ok(bookings);
+    }
+
     [HttpPost("book")]
     public async Task<IActionResult> BookClass([FromBody] CreateBookingDto dto, [FromQuery] Guid userId)
     {
@@ -48,5 +87,22 @@ public class BookingsController : ControllerBase
         await _context.SaveChangesAsync();
 
         return Ok(new { message = "Запис успішно створено!" });
+    }
+
+    [HttpDelete("cancel/{bookingId}")]
+    public async Task<IActionResult> CancelBooking(Guid bookingId)
+    {
+        var booking = await _context.Bookings.Include(b => b.GymClass).FirstOrDefaultAsync(b => b.Id == bookingId);
+        if (booking == null) return NotFound(new { message = "Запис не знайдено." });
+
+        if (booking.GymClass != null && booking.GymClass.BookedCount > 0)
+        {
+            booking.GymClass.BookedCount--;
+        }
+
+        _context.Bookings.Remove(booking);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Бронювання успішно скасовано." });
     }
 }
