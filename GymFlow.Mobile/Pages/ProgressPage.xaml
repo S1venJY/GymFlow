@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="GymFlow.Mobile.Pages.ProgressPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Прогрес">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="18"
+            BackgroundColor="#F5F6F8">
+
+            <VerticalStackLayout
+                Spacing="5">
+
+                <Label
+                    Text="Мій прогрес"
+                    FontSize="28"
+                    FontAttributes="Bold" />
+
+                <Label
+                    Text="Статистика ваших тренувань"
+                    TextColor="Gray" />
+
+            </VerticalStackLayout>
+
+
+
+            <VerticalStackLayout
+                x:Name="LoadingBlock"
+                IsVisible="False"
+                HorizontalOptions="Center"
+                Padding="0,50">
+
+                <ActivityIndicator
+                    x:Name="LoadingIndicator"
+                    IsRunning="False"
+                    WidthRequest="45"
+                    HeightRequest="45" />
+
+            </VerticalStackLayout>
+
+
+
+            <VerticalStackLayout
+                x:Name="ProgressContent"
+                Spacing="15"
+                IsVisible="False">
+
+                <Grid
+                    ColumnDefinitions="*,*"
+                    RowDefinitions="Auto,Auto"
+                    ColumnSpacing="12"
+                    RowSpacing="12">
+
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Padding="18"
+                        BackgroundColor="White"
+                        Stroke="#E5E7E9">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout>
+
+                            <Label
+                                Text="Тренування"
+                                TextColor="Gray" />
+
+                            <Label
+                                x:Name="WorkoutsCountLabel"
+                                FontSize="27"
+                                FontAttributes="Bold" />
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Padding="18"
+                        BackgroundColor="White"
+                        Stroke="#E5E7E9">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout>
+
+                            <Label
+                                Text="Обсяг"
+                                TextColor="Gray" />
+
+                            <Label
+                                x:Name="TotalVolumeLabel"
+                                FontSize="27"
+                                FontAttributes="Bold" />
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Padding="18"
+                        BackgroundColor="White"
+                        Stroke="#E5E7E9">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout>
+
+                            <Label
+                                Text="Максимальна вага"
+                                TextColor="Gray" />
+
+                            <Label
+                                x:Name="MaxWeightLabel"
+                                FontSize="27"
+                                FontAttributes="Bold" />
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Padding="18"
+                        BackgroundColor="White"
+                        Stroke="#E5E7E9">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout>
+
+                            <Label
+                                Text="Серія"
+                                TextColor="Gray" />
+
+                            <Label
+                                x:Name="StreakLabel"
+                                FontSize="27"
+                                FontAttributes="Bold" />
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+                </Grid>
+
+
+
+                <Border
+                    Padding="20"
+                    BackgroundColor="White"
+                    Stroke="#E5E7E9">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout
+                        Spacing="12">
+
+                        <Label
+                            Text="Ціль місяця"
+                            FontSize="20"
+                            FontAttributes="Bold" />
+
+                        <Label
+                            Text="18 з 24 тренувань"
+                            TextColor="Gray" />
+
+                        <ProgressBar
+                            Progress="0.75" />
+
+                        <Label
+                            Text="75% виконано"
+                            FontAttributes="Bold" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <Border
+                    Padding="20"
+                    BackgroundColor="#17202A">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout
+                        Spacing="8">
+
+                        <Label
+                            Text="💪 Продовжуйте тренуватися!"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="White" />
+
+                        <Label
+                            Text="Ще 6 тренувань до місячної цілі."
+                            TextColor="#D5D8DC" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

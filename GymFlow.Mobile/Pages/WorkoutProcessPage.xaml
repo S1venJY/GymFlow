@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GymFlow.Mobile.Pages.WorkoutProcessPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Виконання вправи">
+
+    <Grid BackgroundColor="#F5F6F8" RowDefinitions="Auto,*">
+
+        <Border
+            Grid.Row="0"
+            Padding="20,25"
+            BackgroundColor="#17202A">
+
+            <VerticalStackLayout Spacing="5">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="28"
+                    Text="Активне тренування"
+                    TextColor="White" />
+
+                <Label Text="Слідуйте інструкції та таймеру" TextColor="#D5D8DC" />
+
+            </VerticalStackLayout>
+
+        </Border>
+
+        <VerticalStackLayout
+            Grid.Row="1"
+            Padding="20"
+            HorizontalOptions="Center"
+            Spacing="20"
+            VerticalOptions="Center">
+
+            <Border Padding="25" BackgroundColor="White" Stroke="#E5E7E9">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="15">
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalOptions="Center"
+                        Text="Вправа: Планка" />
+
+                    <Label
+                        FontSize="15"
+                        HorizontalOptions="Center"
+                        Text="Тримайте рівне положення тіла"
+                        TextColor="Gray" />
+
+                    <Label
+                        x:Name="TimerLabel"
+                        FontAttributes="Bold"
+                        FontSize="80"
+                        HorizontalOptions="Center"
+                        Text="15"
+                        TextColor="#17202A" />
+
+                    <Button
+                        x:Name="StartButton"
+                        BackgroundColor="#17202A"
+                        Clicked="OnStartWorkoutClicked"
+                        CornerRadius="12"
+                        HeightRequest="50"
+                        Text="Почати вправу (15 сек)"
+                        TextColor="White"
+                        WidthRequest="220" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>

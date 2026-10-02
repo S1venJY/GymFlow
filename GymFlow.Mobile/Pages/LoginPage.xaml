@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GymFlow.Mobile.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Авторизація">
+
+    <Grid
+        BackgroundColor="#F5F6F8"
+        RowDefinitions="Auto,*">
+
+        <Border
+            Grid.Row="0"
+            Padding="20,25"
+            BackgroundColor="#17202A">
+
+            <VerticalStackLayout Spacing="5">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="28"
+                    Text="Вхід у GymFlow"
+                    TextColor="White" />
+
+                <Label Text="Увійдіть у свій акаунт" TextColor="#D5D8DC" />
+
+            </VerticalStackLayout>
+
+        </Border>
+
+        <VerticalStackLayout
+            Grid.Row="1"
+            Padding="20"
+            Spacing="15"
+            VerticalOptions="Center">
+
+            <Border
+                Padding="15,5"
+                BackgroundColor="White"
+                Stroke="#E5E7E9">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <Entry
+                    x:Name="EmailEntry"
+                    Keyboard="Email"
+                    Placeholder="Введіть Email" />
+
+            </Border>
+
+            <Border
+                Padding="15,5"
+                BackgroundColor="White"
+                Stroke="#E5E7E9">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <Entry
+                    x:Name="PasswordEntry"
+                    IsPassword="True"
+                    Placeholder="Введіть пароль" />
+
+            </Border>
+
+            <Button
+                BackgroundColor="#17202A"
+                Clicked="OnLoginClicked"
+                CornerRadius="12"
+                HeightRequest="50"
+                Text="Увійти"
+                TextColor="White" />
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>

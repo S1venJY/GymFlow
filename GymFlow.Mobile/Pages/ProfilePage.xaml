@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GymFlow.Mobile.Pages.ProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Профіль">
+
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20" BackgroundColor="#F5F6F8" Spacing="18">
+
+            <Border Padding="20" BackgroundColor="#17202A">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
+
+                    <Border WidthRequest="90" HeightRequest="90" BackgroundColor="#34495E">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="45" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            x:Name="AvatarLabel"
+                            FontAttributes="Bold"
+                            FontSize="28"
+                            HorizontalOptions="Center"
+                            Text="ЯЗ"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+
+                    </Border>
+
+                    <Label
+                        x:Name="NameLabel"
+                        FontAttributes="Bold"
+                        FontSize="23"
+                        HorizontalTextAlignment="Center"
+                        TextColor="White" />
+
+                    <Label
+                        x:Name="EmailLabel"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#D5D8DC" />
+
+                    <Button
+                        x:Name="AuthActionButton"
+                        Margin="0,10,0,0"
+                        BackgroundColor="#34495E"
+                        Clicked="OnAuthActionClicked"
+                        CornerRadius="10"
+                        HeightRequest="40"
+                        Text="Увійти"
+                        TextColor="White" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <VerticalStackLayout x:Name="LoadingBlock" HorizontalOptions="Center" IsVisible="False">
+
+                <ActivityIndicator
+                    x:Name="LoadingIndicator"
+                    HeightRequest="45"
+                    IsRunning="False"
+                    WidthRequest="45" />
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout x:Name="ProfileContent" IsVisible="False" Spacing="15">
+
+                <Label FontAttributes="Bold" FontSize="22" Text="Мої записи" />
+
+                <Border Padding="16" BackgroundColor="White" Stroke="#E5E7E9">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+
+                    <CollectionView x:Name="BookingsCollectionView" SelectionMode="None">
+
+                        <CollectionView.ItemTemplate>
+
+                            <DataTemplate>
+
+                                <VerticalStackLayout Padding="0,5" Spacing="4">
+
+                                    <Label FontAttributes="Bold" FontSize="17" Text="{Binding WorkoutName}" />
+
+                                    <Label FontSize="14" Text="{Binding DateText}" TextColor="Gray" />
+
+                                </VerticalStackLayout>
+
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+                </Border>
+
+                <Label Margin="0,10,0,0" FontAttributes="Bold" FontSize="22" Text="Мій абонемент" />
+
+                <Border Padding="20" BackgroundColor="White" Stroke="#E5E7E9">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label x:Name="SubscriptionNameLabel" FontAttributes="Bold" FontSize="21" />
+
+                        <Grid ColumnDefinitions="*,*">
+
+                            <VerticalStackLayout>
+
+                                <Label FontSize="13" Text="Залишилось" TextColor="Gray" />
+
+                                <Label x:Name="RemainingVisitsLabel" FontAttributes="Bold" FontSize="20" />
+
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1">
+
+                                <Label FontSize="13" Text="Діє до" TextColor="Gray" />
+
+                                <Label x:Name="SubscriptionEndDateLabel" FontAttributes="Bold" FontSize="20" />
+
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <Label Margin="0,10,0,0" FontAttributes="Bold" FontSize="22" Text="Налаштування" />
+
+                <Button BackgroundColor="White" Clicked="OnNotificationsClicked" HeightRequest="50" Text="🔔 Сповіщення" TextColor="#17202A" />
+
+                <Button BackgroundColor="White" Clicked="OnSettingsClicked" HeightRequest="50" Text="⚙ Налаштування профілю" TextColor="#17202A" />
+
+                <Button BackgroundColor="#E74C3C" Clicked="OnLogoutClicked" HeightRequest="50" Text="Вийти" TextColor="White" />
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

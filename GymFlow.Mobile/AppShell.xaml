@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <Shell
     x:Class="GymFlow.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:GymFlow.Mobile"
-    Title="GymFlow.Mobile">
+    xmlns:pages="clr-namespace:GymFlow.Mobile.Pages"
+    FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+
+        <Tab
+            Title="Головна"
+            Icon="dotnet_bot.png">
+
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:HomePage}"
+                Route="HomePage" />
+
+        </Tab>
+
+
+        <Tab
+            Title="Щоденник"
+            Icon="dotnet_bot.png">
+
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:DiaryPage}"
+                Route="DiaryPage" />
+
+        </Tab>
+
+
+        <Tab
+            Title="Прогрес"
+            Icon="dotnet_bot.png">
+
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:ProgressPage}"
+                Route="ProgressPage" />
+
+        </Tab>
+
+
+        <Tab
+            Title="Профіль"
+            Icon="dotnet_bot.png">
+
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:ProfilePage}"
+                Route="ProfilePage" />
+
+        </Tab>
+
+    </TabBar>
 
 </Shell>

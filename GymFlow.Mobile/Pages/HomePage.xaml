@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="GymFlow.Mobile.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:GymFlow.Mobile.Models"
+    Title="GymFlow">
+
+    <Grid
+        RowDefinitions="Auto,*"
+        BackgroundColor="#F5F6F8">
+
+
+        <Border
+            Grid.Row="0"
+            BackgroundColor="#17202A"
+            Padding="20,25">
+
+            <VerticalStackLayout Spacing="5">
+
+                <Label
+                    Text="GymFlow"
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="White" />
+
+                <Label
+                    Text="Плануй. Тренуйся. Прогресуй."
+                    FontSize="14"
+                    TextColor="#D5D8DC" />
+
+            </VerticalStackLayout>
+
+        </Border>
+
+
+
+        <Grid
+            Grid.Row="1"
+            Padding="16">
+
+
+            <VerticalStackLayout
+                x:Name="LoadingBlock"
+                IsVisible="False"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="15">
+
+                <ActivityIndicator
+                    x:Name="LoadingIndicator"
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    IsRunning="False" />
+
+                <Label
+                    Text="Завантаження розкладу..."
+                    FontSize="16"
+                    TextColor="Gray" />
+
+            </VerticalStackLayout>
+
+
+
+            <VerticalStackLayout
+                x:Name="ErrorBlock"
+                IsVisible="False"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="15">
+
+                <Label
+                    Text="Не вдалося завантажити дані"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center" />
+
+                <Button
+                    Text="Повторити"
+                    Clicked="OnRetryClicked"
+                    WidthRequest="180" />
+
+            </VerticalStackLayout>
+
+
+
+            <VerticalStackLayout
+                x:Name="EmptyBlock"
+                IsVisible="False"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="10">
+
+                <Label
+                    Text="📅"
+                    FontSize="45"
+                    HorizontalTextAlignment="Center" />
+
+                <Label
+                    Text="Тренувань поки немає"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center" />
+
+                <Label
+                    Text="Спробуйте оновити розклад пізніше."
+                    TextColor="Gray"
+                    HorizontalTextAlignment="Center" />
+
+            </VerticalStackLayout>
+
+
+
+            <CollectionView
+                x:Name="ClassesCollectionView"
+                IsVisible="False"
+                SelectionMode="None">
+
+                <CollectionView.Header>
+
+                    <VerticalStackLayout
+                        Padding="0,0,0,15"
+                        Spacing="5">
+
+                        <Label
+                            Text="Найближчі тренування"
+                            FontSize="24"
+                            FontAttributes="Bold" />
+
+                        <Label
+                            Text="Оберіть тренування та запишіться онлайн"
+                            FontSize="14"
+                            TextColor="Gray" />
+
+                    </VerticalStackLayout>
+
+                </CollectionView.Header>
+
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate
+                        x:DataType="model:GymClassDto">
+
+                        <Border
+                            Margin="0,0,0,14"
+                            Padding="16"
+                            BackgroundColor="White"
+                            Stroke="#E5E7E9">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="16" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout Spacing="10">
+
+                                <Label
+                                    Text="{Binding Name}"
+                                    FontSize="20"
+                                    FontAttributes="Bold" />
+
+                                <Label
+                                    Text="{Binding TrainerName, StringFormat='Тренер: {0}'}"
+                                    FontSize="14"
+                                    TextColor="Gray" />
+
+                                <Grid
+                                    ColumnDefinitions="*,*">
+
+                                    <Label
+                                        Grid.Column="0"
+                                        Text="{Binding DateText, StringFormat='📅 {0}'}"
+                                        FontSize="14" />
+
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding TimeText, StringFormat='🕐 {0}'}"
+                                        FontSize="14"
+                                        HorizontalTextAlignment="End" />
+
+                                </Grid>
+
+                                <Label
+                                    Text="{Binding PlacesText}"
+                                    FontSize="14"
+                                    TextColor="#2471A3" />
+
+                                <Button
+                                    Text="Записатися"
+                                    CommandParameter="{Binding Id}"
+                                    Clicked="OnBookClicked"
+                                    HeightRequest="48"
+                                    CornerRadius="12"
+                                    BackgroundColor="#17202A"
+                                    TextColor="White" />
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="GymFlow.Mobile.Pages.DiaryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:GymFlow.Mobile.Models"
+    Title="Щоденник">
+
+    <Grid
+        RowDefinitions="Auto,*"
+        BackgroundColor="#F5F6F8">
+
+        <VerticalStackLayout
+            Grid.Row="0"
+            Padding="20,25"
+            BackgroundColor="#17202A"
+            Spacing="5">
+
+            <Label
+                Text="Щоденник"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="White" />
+
+            <Label
+                Text="Ваші спортивні результати"
+                TextColor="#D5D8DC" />
+
+        </VerticalStackLayout>
+
+
+        <Grid
+            Grid.Row="1"
+            Padding="16">
+
+
+            <VerticalStackLayout
+                x:Name="LoadingBlock"
+                IsVisible="False"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="15">
+
+                <ActivityIndicator
+                    x:Name="LoadingIndicator"
+                    IsRunning="False"
+                    WidthRequest="45"
+                    HeightRequest="45" />
+
+                <Label
+                    Text="Завантаження..."
+                    TextColor="Gray" />
+
+            </VerticalStackLayout>
+
+
+
+            <VerticalStackLayout
+                x:Name="EmptyBlock"
+                IsVisible="False"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="12">
+
+                <Label
+                    Text="📖"
+                    FontSize="50"
+                    HorizontalTextAlignment="Center" />
+
+                <Label
+                    Text="Щоденник порожній"
+                    FontSize="20"
+                    FontAttributes="Bold" />
+
+                <Button
+                    Text="Додати тренування"
+                    Clicked="OnAddWorkoutClicked" />
+
+            </VerticalStackLayout>
+
+
+
+            <CollectionView
+                x:Name="WorkoutCollectionView"
+                IsVisible="False"
+                SelectionMode="None">
+
+                <CollectionView.Header>
+
+                    <Button
+                        Text="+ Додати результат"
+                        Clicked="OnAddWorkoutClicked"
+                        Margin="0,0,0,15"
+                        HeightRequest="50"
+                        BackgroundColor="#17202A"
+                        TextColor="White" />
+
+                </CollectionView.Header>
+
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate
+                        x:DataType="model:WorkoutDto">
+
+                        <Border
+                            Margin="0,0,0,12"
+                            Padding="16"
+                            BackgroundColor="White"
+                            Stroke="#E5E7E9">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout
+                                Spacing="8">
+
+                                <Grid
+                                    ColumnDefinitions="*,Auto">
+
+                                    <Label
+                                        Text="{Binding ExerciseName}"
+                                        FontSize="19"
+                                        FontAttributes="Bold" />
+
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding MuscleGroup}"
+                                        TextColor="#2471A3"
+                                        FontSize="13" />
+
+                                </Grid>
+
+                                <Label
+                                    Text="{Binding DateText, StringFormat='Дата: {0}'}"
+                                    FontSize="13"
+                                    TextColor="Gray" />
+
+                                <Grid
+                                    ColumnDefinitions="*,*,*"
+                                    ColumnSpacing="8">
+
+                                    <VerticalStackLayout>
+                                        <Label
+                                            Text="Вага"
+                                            FontSize="12"
+                                            TextColor="Gray" />
+
+                                        <Label
+                                            Text="{Binding WeightText}"
+                                            FontAttributes="Bold" />
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout
+                                        Grid.Column="1">
+
+                                        <Label
+                                            Text="Повторення"
+                                            FontSize="12"
+                                            TextColor="Gray" />
+
+                                        <Label
+                                            Text="{Binding RepetitionsText}"
+                                            FontAttributes="Bold" />
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout
+                                        Grid.Column="2">
+
+                                        <Label
+                                            Text="Підходи"
+                                            FontSize="12"
+                                            TextColor="Gray" />
+
+                                        <Label
+                                            Text="{Binding SetsText}"
+                                            FontAttributes="Bold" />
+                                    </VerticalStackLayout>
+
+                                </Grid>
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
